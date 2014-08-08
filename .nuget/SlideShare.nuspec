@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+    <metadata>
+        <id>Hasseware.SlideShare</id>
+        <version>1.0.0.0</version>
+        <title>SlideShare .NET Client</title>
+        <authors>Miguel Hasse de Oliveira</authors>
+        <owners>Miguel Hasse de Oliveira</owners>
+        <licenseUrl>https://github.com/miguelhasse/Net.SlideShare/raw/master/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/miguelhasse/Net.SlideShare</projectUrl>
+        <iconUrl>http://www.slideshare.net/images/logo/press-logos/slideshare_200x50.png</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Client library for accessing the SlideShare API in .NET</description>
+        <releaseNotes></releaseNotes>
+        <copyright>Copyright 2014 Miguel Hasse de Oliveira</copyright>
+        <language>en-US</language>
+        <tags>SlideShare PCL Portable</tags>
+        <dependencies>
+          <dependency id="Microsoft.Net.Http" version="2.2.22" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="..\src\Hasseware.Net.SlideShare\bin\Release\Hasseware.Net.SlideShare.dll" target="lib\net45\Hasseware.Net.SlideShare.dll" />
+        <file src="..\src\Hasseware.Net.SlideShare.Portable\bin\Release\Hasseware.Net.SlideShare.dll" target="lib\portable-net45+win+wpa81+wp80\Hasseware.Net.SlideShare.dll" />
+        <file src="..\src\Hasseware.Net.SlideShare.Universal\bin\Release\Hasseware.Net.SlideShare.dll" target="lib\portable-win81+wpa81\Hasseware.Net.SlideShare.dll" />
+    </files>
+</package>
