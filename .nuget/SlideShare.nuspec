@@ -8,15 +8,20 @@
         <owners>Miguel Hasse de Oliveira</owners>
         <licenseUrl>https://github.com/miguelhasse/Net.SlideShare/raw/master/LICENSE</licenseUrl>
         <projectUrl>https://github.com/miguelhasse/Net.SlideShare</projectUrl>
-        <iconUrl>http://www.slideshare.net/images/logo/press-logos/slideshare_200x50.png</iconUrl>
-        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <iconUrl>https://github.com/miguelhasse/Net.SlideShare/raw/master/.nuget/Package.png</iconUrl>
+      <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Client library for accessing the SlideShare API in .NET</description>
         <releaseNotes></releaseNotes>
         <copyright>Copyright 2014 Miguel Hasse de Oliveira</copyright>
         <language>en-US</language>
         <tags>SlideShare PCL Portable</tags>
         <dependencies>
-          <dependency id="Microsoft.Net.Http" version="2.2.22" />
+            <group targetFramework=".NETPortable0.0-net45+win+wpa81+wp80">
+                <dependency id="Microsoft.Net.Http" version="2.2.22" />
+            </group>
+            <group targetFramework=".NETPortable0.0-win81+wpa81">
+                <dependency id="Microsoft.Net.Http" version="2.2.22" />
+            </group>
         </dependencies>
     </metadata>
     <files>
