@@ -1,29 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
-        <id>Hasseware.SlideShare</id>
-        <version>1.0.1.0</version>
-        <title>SlideShare .NET Client</title>
+        <id>Hasseware.SlideShare.TransientFaultHandling</id>
+        <version>1.0.0.0</version>
+        <title>SlideShare .NET Client Transient Fault Handling</title>
         <authors>Miguel Hasse de Oliveira</authors>
         <owners>Miguel Hasse de Oliveira</owners>
         <licenseUrl>https://github.com/miguelhasse/Net.SlideShare/raw/master/LICENSE</licenseUrl>
         <projectUrl>https://github.com/miguelhasse/Net.SlideShare</projectUrl>
         <iconUrl>https://github.com/miguelhasse/Net.SlideShare/raw/master/.nuget/Package.png</iconUrl>
       <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Client library for accessing the SlideShare API in .NET</description>
+        <description>This library provides set of extensions for SlideShare .NET Client to handle transient failures when working with the SlideShare services.</description>
         <releaseNotes></releaseNotes>
         <copyright>Copyright 2015 Miguel Hasse de Oliveira</copyright>
         <language>en-US</language>
         <tags>SlideShare PCL Portable</tags>
         <dependencies>
-            <group targetFramework=".NETPortable0.0-net45+win+wpa81+wp80">
+          <group>
+            <dependency id="Hasseware.SlideShare" version="1.0.1" />
+          </group>
+          <group targetFramework=".NETPortable0.0-net45+win+wpa81+wp80">
                 <dependency id="Microsoft.Net.Http" version="2.2.22" />
-            </group>
+          </group>
         </dependencies>
     </metadata>
     <files>
-        <file src="..\src\Hasseware.Net.SlideShare\bin\Release\Hasseware.Net.SlideShare.dll" target="lib\net45\Hasseware.Net.SlideShare.dll" />
-        <file src="..\src\Hasseware.Net.SlideShare.Portable\bin\Release\Hasseware.Net.SlideShare.dll" target="lib\portable-net45+win+wpa81+wp80\Hasseware.Net.SlideShare.dll" />
-        <file src="..\src\Hasseware.Net.SlideShare.Universal\bin\Release\Hasseware.Net.SlideShare.dll" target="lib\uwp\Hasseware.Net.SlideShare.dll" />
+        <file src="..\src\Hasseware.Net.SlideShare.TransientFaultHandling\bin\Release\Hasseware.Net.SlideShare.dll" target="lib\net45\Hasseware.Net.SlideShare.dll" />
+        <file src="..\src\Hasseware.Net.SlideShare.TransientFaultHandling.Portable\bin\Release\Hasseware.Net.SlideShare.dll" target="lib\portable-net45+win+wpa81+wp80\Hasseware.Net.SlideShare.dll" />
     </files>
 </package>

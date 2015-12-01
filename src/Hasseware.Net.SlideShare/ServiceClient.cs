@@ -208,7 +208,11 @@ namespace System.Net.SlideShare
 			if (String.Equals(root.Name.LocalName, "SlideShareServiceError"))
 			{
 				var el = root.Element("Message");
-				exception = new ServiceRequestException(Int32.Parse(el.Attribute("ID").Value), el.Value);
+
+                int statusCode;
+                exception = (Int32.TryParse(el.Attribute("ID").Value, out statusCode)) ?
+                   new ServiceRequestException(statusCode, el.Value) : new ServiceRequestException(-1, el.Value);
+
 				return true;
 			}
 			exception = null;
@@ -533,11 +537,47 @@ namespace System.Net.SlideShare
 		#endregion
 	}
 
-	public sealed class ServiceRequestException : HttpRequestException
+	public sealed class ServiceRequestException : Exception
 	{
 		internal ServiceRequestException(int statusCode, string message) : base(message)
 		{
 			this.HResult = statusCode;
+            try { this.Status = (ServiceExceptionStatus)Enum.ToObject(typeof(ServiceExceptionStatus), statusCode); }
+            catch (ArgumentException) { this.Status = ServiceExceptionStatus.Unknown; }
 		}
-	}
+
+        public ServiceExceptionStatus Status { get; private set; }
+    }
+
+    public enum ServiceExceptionStatus
+    {
+        Unknown = -1,
+        MissingApiKey = 0,
+        FailedApiValidation = 1,
+        FailedUserAuthentication = 2,
+        MissingTitle = 3,
+        MissingUploadFile = 4,
+        BlankTitle = 5,
+        InvalidFileSource = 6,
+        InvalidExtension = 7,
+        FileSizeExceeded = 8,
+        SlideShowNotFound = 9,
+        UserNotFound = 10,
+        GroupNotFound = 11,
+        MissingTag = 12,
+        TagNotFound = 13,
+        MissingParameter  = 14,
+        MissingSearchQuery = 15,
+        InsufficientPermissions = 16,
+        InvalidParameters = 17,
+        AccountAlreadyLinked = 70,
+        LinkedAccountNotFound = 71,
+        UserDoesNotExist = 72,
+        InvalidApplicationID = 73,
+        LoginAlreadyExists = 74,
+        EmailAlreadyExists = 75,
+        AccountUpgradeRequired = 97,
+        AccountLimitExceeded = 99,
+        AccountBlocked = 100
+    }
 }

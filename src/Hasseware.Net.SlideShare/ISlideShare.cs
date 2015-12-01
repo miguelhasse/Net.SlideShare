@@ -7,49 +7,103 @@ namespace System.Net.SlideShare
 {
 	public interface ISlideShareShow
 	{
+		/// <summary>
+		/// Returns slideshow by ID.
+		/// </summary>
 		Task<Slideshow> GetAsync(int slideshowId, bool excludeTags = false, bool includeTranscript = false, bool detailed = false, CancellationToken cancellationToken = default(CancellationToken));
 
+		/// <summary>
+		/// Returns slideshow by URL.
+		/// </summary>
 		Task<Slideshow> GetAsync(string slideshowUrl, bool excludeTags = false, bool includeTranscript = false, bool detailed = false, CancellationToken cancellationToken = default(CancellationToken));
 
+		/// <summary>
+		/// Returns slideshows that contain the specified tag.
+		/// </summary>
 		Task<IEnumerable<Slideshow>> GetByTagAsync(string tags, bool detailed = false, int? offset = null, int? limit = null, CancellationToken cancellationToken = default(CancellationToken));
 
+		/// <summary>
+		/// Returns slideshows that are a part of the specified group.
+		/// </summary>
 		Task<IEnumerable<Slideshow>> GetByGroupAsync(string groupname, bool detailed = false, int? offset = null, int? limit = null, CancellationToken cancellationToken = default(CancellationToken));
 
+		/// <summary>
+		/// Returns user slideshows.
+		/// </summary>
 		Task<IEnumerable<Slideshow>> GetByUserAsync(string username, bool includeUnconverted = false, bool detailed = false, int? offset = null, int? limit = null, CancellationToken cancellationToken = default(CancellationToken));
 
+		/// <summary>
+		/// Returns slideshows according to the search criteria.
+		/// </summary>
 		Task<IEnumerable<Slideshow>> SearchAsync(string query, SlideshowSearchOptions options, bool includeTranscript = false, bool detailed = false, int? offset = null, int? limit = null, CancellationToken cancellationToken = default(CancellationToken));
 
+		/// <summary>
+		/// Upload a slideshow.
+		/// </summary>
 		Task<int> UploadAsync(string filepath, SlideshowDetailOptions options, CancellationToken cancellationToken = default(CancellationToken));
 
+		/// <summary>
+		/// Edit a slideshow.
+		/// </summary>
 		Task EditAsync(int slideshowId, SlideshowDetailOptions options, CancellationToken cancellationToken = default(CancellationToken));
 
+		/// <summary>
+		/// Delete a slideshow.
+		/// </summary>
 		Task DeleteAsync(int slideshowId, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public interface ISlideShareUser
 	{
+		/// <summary>
+		/// Returns user groups.
+		/// </summary>
 		Task<IEnumerable<Group>> GetGroupsAsync(string username, CancellationToken cancellationToken = default(CancellationToken));
 
+		/// <summary>
+		/// Returns user contacts.
+		/// </summary>
 		Task<IEnumerable<Contact>> GetContactsAsync(string username, CancellationToken cancellationToken = default(CancellationToken));
 
+		/// <summary>
+		/// Returns user tags.
+		/// </summary>
 		Task<IEnumerable<string>> GetTagsAsync(CancellationToken cancellationToken = default(CancellationToken));
 	}
 	
 	public interface ISlideShareFavorite
 	{
+		/// <summary>
+		/// Returns user favorites.
+		/// </summary>
 		Task<IEnumerable<Favorite>> GetAsync(string username, CancellationToken cancellationToken = default(CancellationToken));
 
+		/// <summary>
+		/// Favorites slideshow (identified by slideshow_id).
+		/// </summary>
 		Task<bool> AddAsync(int slideshowId, CancellationToken cancellationToken = default(CancellationToken));
 
+		/// <summary>
+		/// Check user favorites.
+		/// </summary>
 		Task<bool> CheckAsync(int slideshowId, CancellationToken cancellationToken = default(CancellationToken));
 	}
 	
 	public interface ISlideShareMarketing
 	{
+		/// <summary>
+		/// Get user campaigns.
+		/// </summary>
 		Task<IEnumerable<Campaign>> GetCampaignsAsync(CancellationToken cancellationToken = default(CancellationToken));
 
+		/// <summary>
+		/// Get user leads.
+		/// </summary>
 		Task<IEnumerable<Lead>> GetLeadsAsync(DateTime? begin = null, DateTime? end = null, CancellationToken cancellationToken = default(CancellationToken));
 
+		/// <summary>
+		/// Get user campaign leads.
+		/// </summary>
 		Task<IEnumerable<Lead>> GetCampaignLeadsAsync(string campaignId, DateTime? begin = null, DateTime? end = null, CancellationToken cancellationToken = default(CancellationToken));
 	}
 	
