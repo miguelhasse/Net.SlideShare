@@ -39,25 +39,25 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>..\Hasseware.Net.SlideShare\Development.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\Net.SlideShare\Development.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\Hasseware.Net.SlideShare.TransientFaultHandling\Implementation\ReliableServiceClient.cs">
+    <Compile Include="..\Net.SlideShare.TransientFaultHandling\Implementation\ReliableServiceClient.cs">
       <Link>Implementation\ReliableServiceClient.cs</Link>
     </Compile>
-    <Compile Include="..\Hasseware.Net.SlideShare.TransientFaultHandling\IReliableServiceClient.cs">
+    <Compile Include="..\Net.SlideShare.TransientFaultHandling\IReliableServiceClient.cs">
       <Link>IReliableServiceClient.cs</Link>
     </Compile>
-    <Compile Include="..\Hasseware.Net.SlideShare.TransientFaultHandling\ServiceClientExtensions.cs">
+    <Compile Include="..\Net.SlideShare.TransientFaultHandling\ServiceClientExtensions.cs">
       <Link>ServiceClientExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\Hasseware.Net.SlideShare.TransientFaultHandling\Strategies\ServiceTransientErrorDetectionStrategy.cs">
+    <Compile Include="..\Net.SlideShare.TransientFaultHandling\Strategies\ServiceTransientErrorDetectionStrategy.cs">
       <Link>Strategies\ServiceTransientErrorDetectionStrategy.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Hasseware.Net.SlideShare.Portable\Hasseware.Net.SlideShare.Portable.csproj">
+    <ProjectReference Include="..\Net.SlideShare.Portable\Hasseware.Net.SlideShare.Portable.csproj">
       <Project>{5105e711-a45c-4ffb-9974-9d92b1b19f38}</Project>
       <Name>Hasseware.Net.SlideShare.Portable</Name>
     </ProjectReference>

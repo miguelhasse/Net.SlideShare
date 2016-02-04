@@ -33,7 +33,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>..\Hasseware.Net.SlideShare\Development.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\Net.SlideShare\Development.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -55,7 +55,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Hasseware.Net.SlideShare\Hasseware.Net.SlideShare.csproj">
+    <ProjectReference Include="..\Net.SlideShare\Hasseware.Net.SlideShare.csproj">
       <Project>{a36fa80d-f4ab-499b-acb4-90248a4dd21f}</Project>
       <Name>Hasseware.Net.SlideShare</Name>
     </ProjectReference>

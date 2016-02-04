@@ -107,31 +107,31 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Hasseware.Net.SlideShare\Extensions.cs">
+    <Compile Include="..\Net.SlideShare\Extensions.cs">
       <Link>Extensions.cs</Link>
     </Compile>
-    <Compile Include="..\Hasseware.Net.SlideShare\Internal\Extensions.cs">
+    <Compile Include="..\Net.SlideShare\Internal\Extensions.cs">
       <Link>Internal\Extensions.cs</Link>
     </Compile>
-    <Compile Include="..\Hasseware.Net.SlideShare\ISlideShare.cs">
+    <Compile Include="..\Net.SlideShare\ISlideShare.cs">
       <Link>ISlideShare.cs</Link>
     </Compile>
-    <Compile Include="..\Hasseware.Net.SlideShare\IStorageProvider.cs">
+    <Compile Include="..\Net.SlideShare\IStorageProvider.cs">
       <Link>IStorageProvider.cs</Link>
     </Compile>
-    <Compile Include="..\Hasseware.Net.SlideShare\Properties\AssemblyInfo.cs">
+    <Compile Include="..\Net.SlideShare\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="..\Hasseware.Net.SlideShare\ServiceClient.cs">
+    <Compile Include="..\Net.SlideShare\ServiceClient.cs">
       <Link>ServiceClient.cs</Link>
     </Compile>
-    <Compile Include="..\Hasseware.Net.SlideShare\ServiceModel.cs">
+    <Compile Include="..\Net.SlideShare\ServiceModel.cs">
       <Link>ServiceModel.cs</Link>
     </Compile>
-    <Compile Include="..\Hasseware.Net.SlideShare\SlideShareHandler.cs">
+    <Compile Include="..\Net.SlideShare\SlideShareHandler.cs">
       <Link>SlideShareHandler.cs</Link>
     </Compile>
-    <Compile Include="..\Hasseware.Net.SlideShare\SlideShareMediaTypes.cs">
+    <Compile Include="..\Net.SlideShare\SlideShareMediaTypes.cs">
       <Link>SlideShareMediaTypes.cs</Link>
     </Compile>
     <Compile Include="Internal\ServiceAdapter.cs" />
