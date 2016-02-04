@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hasseware.Net.SlideShare", "src\Hasseware.Net.SlideShare\Hasseware.Net.SlideShare.csproj", "{A36FA80D-F4AB-499B-ACB4-90248A4DD21F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hasseware.Net.SlideShare", "src\Net.SlideShare\Hasseware.Net.SlideShare.csproj", "{A36FA80D-F4AB-499B-ACB4-90248A4DD21F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hasseware.Net.SlideShare.Portable", "src\Hasseware.Net.SlideShare.Portable\Hasseware.Net.SlideShare.Portable.csproj", "{5105E711-A45C-4FFB-9974-9D92B1B19F38}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hasseware.Net.SlideShare.Portable", "src\Net.SlideShare.Portable\Hasseware.Net.SlideShare.Portable.csproj", "{5105E711-A45C-4FFB-9974-9D92B1B19F38}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6DF8731A-9647-4E38-9604-9EE6A4E66DFD}"
 	ProjectSection(SolutionItems) = preProject
@@ -18,11 +18,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6DF873
 		.nuget\SlideShare.TransientFaultHandling.nuspec = .nuget\SlideShare.TransientFaultHandling.nuspec
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hasseware.Net.SlideShare.TransientFaultHandling", "src\Hasseware.Net.SlideShare.TransientFaultHandling\Hasseware.Net.SlideShare.TransientFaultHandling.csproj", "{E781E3ED-BC25-4C54-9A43-A57E3230B844}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hasseware.Net.SlideShare.TransientFaultHandling", "src\Net.SlideShare.TransientFaultHandling\Hasseware.Net.SlideShare.TransientFaultHandling.csproj", "{E781E3ED-BC25-4C54-9A43-A57E3230B844}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hasseware.Net.SlideShare.TransientFaultHandling.Portable", "src\Hasseware.Net.SlideShare.TransientFaultHandling.Portable\Hasseware.Net.SlideShare.TransientFaultHandling.Portable.csproj", "{16197BE7-F08C-41D0-8917-29D9E922D433}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hasseware.Net.SlideShare.TransientFaultHandling.Portable", "src\Net.SlideShare.TransientFaultHandling.Portable\Hasseware.Net.SlideShare.TransientFaultHandling.Portable.csproj", "{16197BE7-F08C-41D0-8917-29D9E922D433}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hasseware.Net.SlideShare.Universal", "src\Hasseware.Net.SlideShare.Universal\Hasseware.Net.SlideShare.Universal.csproj", "{D32F6CA2-F5C6-49B4-B0B5-A39BEE7F4DD6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hasseware.Net.SlideShare.Universal", "src\Net.SlideShare.Universal\Hasseware.Net.SlideShare.Universal.csproj", "{D32F6CA2-F5C6-49B4-B0B5-A39BEE7F4DD6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
