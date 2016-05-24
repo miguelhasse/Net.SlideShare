@@ -22,8 +22,8 @@
         </dependencies>
     </metadata>
     <files>
-        <file src="..\src\Hasseware.Net.SlideShare\bin\Release\Hasseware.Net.SlideShare.dll" target="lib\net45\Hasseware.Net.SlideShare.dll" />
-        <file src="..\src\Hasseware.Net.SlideShare.Portable\bin\Release\Hasseware.Net.SlideShare.dll" target="lib\portable-net45+win+wpa81+wp80\Hasseware.Net.SlideShare.dll" />
-        <file src="..\src\Hasseware.Net.SlideShare.Universal\bin\Release\Hasseware.Net.SlideShare.dll" target="lib\uwp\Hasseware.Net.SlideShare.dll" />
+        <file src="..\src\Net.SlideShare\bin\Release\Hasseware.Net.SlideShare.dll" target="lib\net45\Hasseware.Net.SlideShare.dll" />
+        <file src="..\src\Net.SlideShare.Portable\bin\Release\Hasseware.Net.SlideShare.dll" target="lib\portable-net45+win+wpa81+wp80\Hasseware.Net.SlideShare.dll" />
+        <file src="..\src\Net.SlideShare.Universal\bin\Release\Hasseware.Net.SlideShare.dll" target="lib\uwp\Hasseware.Net.SlideShare.dll" />
     </files>
 </package>

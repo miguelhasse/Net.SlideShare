@@ -25,7 +25,7 @@
         </dependencies>
     </metadata>
     <files>
-        <file src="..\src\Hasseware.Net.SlideShare.TransientFaultHandling\bin\Release\Hasseware.Net.SlideShare.dll" target="lib\net45\Hasseware.Net.SlideShare.dll" />
-        <file src="..\src\Hasseware.Net.SlideShare.TransientFaultHandling.Portable\bin\Release\Hasseware.Net.SlideShare.dll" target="lib\portable-net45+win+wpa81+wp80\Hasseware.Net.SlideShare.dll" />
+        <file src="..\src\Net.SlideShare.TransientFaultHandling\bin\Release\Hasseware.Net.SlideShare.dll" target="lib\net45\Hasseware.Net.SlideShare.dll" />
+        <file src="..\src\Net.SlideShare.TransientFaultHandling.Portable\bin\Release\Hasseware.Net.SlideShare.dll" target="lib\portable-net45+win+wpa81+wp80\Hasseware.Net.SlideShare.dll" />
     </files>
 </package>
