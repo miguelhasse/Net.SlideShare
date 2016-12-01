@@ -1,4 +1,5 @@
 ## SlideShare Client for .NET ##
+[![NuGet Status](http://img.shields.io/nuget/v/hasseware.slideshare.svg?style=flat)](https://www.nuget.org/packages/hasseware.slideshare /)
 
 Implements asynchronous operations and includes support for portable class libraries.
 
