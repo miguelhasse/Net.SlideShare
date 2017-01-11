@@ -157,9 +157,14 @@ namespace System.Net.SlideShare
 		public int SlideshowCount { get; private set; }
 
 		public int CommentCount { get; private set; }
-	}
 
-	public class Group
+        internal static IEnumerable<Contact> ToEntityList(XElement root)
+        {
+            return root.Descendants("Contact").Select(s => new Contact(s)).ToList();
+        }
+    }
+
+    public class Group
 	{
 		internal Group(XElement root)
 		{
@@ -185,7 +190,12 @@ namespace System.Net.SlideShare
 		public DateTime Created { get; private set; }
 
 		public Uri GroupUrl { get; private set; }
-	}
+
+        internal static IEnumerable<Group> ToEntityList(XElement root)
+        {
+            return root.Descendants("Group").Select(s => new Group(s)).ToList();
+        }
+    }
 
 	public class Favorite
 	{
@@ -198,7 +208,12 @@ namespace System.Net.SlideShare
 		public int ID { get; private set; }
 
 		public string Tags { get; private set; }
-	}
+
+        internal static IEnumerable<Favorite> ToEntityList(XElement root)
+        {
+            return root.Descendants("favorite").Select(s => new Favorite(s)).ToList();
+        }
+    }
 
 	public class Lead
 	{
@@ -271,7 +286,12 @@ namespace System.Net.SlideShare
 		public string Mechanism { get; private set; }
 		
 		public decimal Cost { get; private set; }
-	}
+
+        internal static IEnumerable<Lead> ToEntityList(XElement root)
+        {
+            return root.Descendants("Lead").Select(s => new Lead(s)).ToList();
+        }
+    }
 		
 	public class Campaign
 	{
@@ -314,7 +334,13 @@ namespace System.Net.SlideShare
 		public decimal DailySpend { get; private set; }
 		
 		public string State { get; private set; }
-	}
+
+        internal static IEnumerable<Campaign> ToEntityList(XElement root)
+        {
+            return root.Descendants("LeadCampaign").Select(s => (Campaign)new LeadCampaign(s))
+                .Union(root.Descendants("PromotionCampaign").Select(s => new PromotionCampaign(s)));
+        }
+    }
 
 	public class LeadCampaign : Campaign
 	{
@@ -592,7 +618,12 @@ namespace System.Net.SlideShare
 		public int CommentCount { get; private set; }
 
 		public string SlideshowType { get; private set; }
-	}
+
+        internal static IEnumerable<FeedItem> ToEntityList(XElement root)
+        {
+            return root.Descendants("item").Select(s => new FeedItem(s)).ToList();
+        }
+    }
 
 	public enum SlideshowStatus : int
 	{

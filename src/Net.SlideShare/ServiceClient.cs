@@ -92,8 +92,7 @@ namespace System.Net.SlideShare
 				IncludeCredentials(parameters);
 			}
 			TaskCompletionSource<XElement> tcs = new TaskCompletionSource<XElement>();
-			this.client.GetAsync(CreateRequestUri(cmd, parameters),
-				HttpCompletionOption.ResponseHeadersRead, cancellationToken)
+			this.client.GetAsync(CreateRequestUri(cmd, parameters), HttpCompletionOption.ResponseHeadersRead, cancellationToken)
 				.ContinueWith(t => HandleResponseCompletion(t, tcs));
 			return tcs.Task;
 		}
@@ -232,62 +231,62 @@ namespace System.Net.SlideShare
 				this.client = client;
 			}
 
-			public async Task<Slideshow> GetAsync(int slideshowId, bool excludeTags, bool includeTranscript, bool detailed, CancellationToken cancellationToken)
+			public Task<Slideshow> GetAsync(int slideshowId, bool excludeTags, bool includeTranscript, bool detailed, CancellationToken cancellationToken)
 			{
 				var parameters = new Dictionary<string, object>
 				{
 					{ "slideshow_id", slideshowId }, { "exclude_tags", excludeTags },
 					{ "detailed", detailed }, { "get_transcript", includeTranscript }
 				};
-				var response = await client.GetAsync("get_slideshow", parameters, false, cancellationToken).ConfigureAwait(false);
-				return ToSlideshow(response, detailed);
+				return client.GetAsync("get_slideshow", parameters, false, cancellationToken)
+                    .ContinueWith(t => ToSlideshow(t.Result, detailed), TaskContinuationOptions.OnlyOnRanToCompletion);
 			}
 
-			public async Task<Slideshow> GetAsync(string slideshowUrl, bool excludeTags, bool includeTranscript, bool detailed, CancellationToken cancellationToken)
+			public Task<Slideshow> GetAsync(string slideshowUrl, bool excludeTags, bool includeTranscript, bool detailed, CancellationToken cancellationToken)
 			{
 				var parameters = new Dictionary<string, object>
 				{
 					{ "slideshow_url", slideshowUrl }, { "exclude_tags", excludeTags },
 					{ "detailed", detailed }, { "get_transcript", includeTranscript }
 				};
-				var response = await client.GetAsync("get_slideshow", parameters, false, cancellationToken).ConfigureAwait(false);
-				return ToSlideshow(response, detailed);
-			}
+				return client.GetAsync("get_slideshow", parameters, false, cancellationToken)
+				    .ContinueWith(t => ToSlideshow(t.Result, detailed), TaskContinuationOptions.OnlyOnRanToCompletion);
+            }
 
-			public async Task<IEnumerable<Slideshow>> GetByTagAsync(string tags, bool detailed, int? offset, int? limit, CancellationToken cancellationToken)
+			public Task<IEnumerable<Slideshow>> GetByTagAsync(string tags, bool detailed, int? offset, int? limit, CancellationToken cancellationToken)
 			{
 				var parameters = new Dictionary<string, object>
 				{
 					{ "tags", tags }, { "detailed", detailed },
 					{ "offset", offset }, { "limit", limit ?? (offset.HasValue ? 10 : (int?)null) }
 				};
-				var response = await client.GetAsync("get_slideshows_by_tag", parameters, false, cancellationToken).ConfigureAwait(false);
-				return ToSlideshows(response, detailed);
+                return client.GetAsync("get_slideshows_by_tag", parameters, false, cancellationToken)
+                    .ContinueWith(t => ToSlideshows(t.Result, detailed), TaskContinuationOptions.OnlyOnRanToCompletion);
 			}
 
-			public async Task<IEnumerable<Slideshow>> GetByGroupAsync(string groupname, bool detailed, int? offset, int? limit, CancellationToken cancellationToken)
+			public Task<IEnumerable<Slideshow>> GetByGroupAsync(string groupname, bool detailed, int? offset, int? limit, CancellationToken cancellationToken)
 			{
 				var parameters = new Dictionary<string, object>
 				{
 					{ "group_name", groupname }, { "detailed", detailed },
 					{ "offset", offset }, { "limit", limit ?? (offset.HasValue ? 10 : (int?)null) }
 				};
-				var response = await client.GetAsync("get_slideshows_by_group", parameters, false, cancellationToken).ConfigureAwait(false);
-				return ToSlideshows(response, detailed);
-			}
+				return client.GetAsync("get_slideshows_by_group", parameters, false, cancellationToken)
+                    .ContinueWith(t => ToSlideshows(t.Result, detailed), TaskContinuationOptions.OnlyOnRanToCompletion);
+            }
 
-			public async Task<IEnumerable<Slideshow>> GetByUserAsync(string username, bool includeUnconverted, bool detailed, int? offset, int? limit, CancellationToken cancellationToken)
+			public Task<IEnumerable<Slideshow>> GetByUserAsync(string username, bool includeUnconverted, bool detailed, int? offset, int? limit, CancellationToken cancellationToken)
 			{
 				var parameters = new Dictionary<string, object>
 				{
 					{ "username_for", username }, { "detailed", detailed }, { "get_unconverted", includeUnconverted },
 					{ "offset", offset }, { "limit", limit ?? (offset.HasValue ? 10 : (int?)null) }
 				};
-				var response = await client.GetAsync("get_slideshows_by_user", parameters, false, cancellationToken).ConfigureAwait(false);
-				return ToSlideshows(response, detailed);
-			}
+				return client.GetAsync("get_slideshows_by_user", parameters, false, cancellationToken)
+                    .ContinueWith(t => ToSlideshows(t.Result, detailed), TaskContinuationOptions.OnlyOnRanToCompletion);
+            }
 
-			public async Task<IEnumerable<Slideshow>> SearchAsync(string query, SlideshowSearchOptions options, bool includeTranscript, bool detailed, int? offset, int? limit, CancellationToken cancellationToken)
+			public Task<IEnumerable<Slideshow>> SearchAsync(string query, SlideshowSearchOptions options, bool includeTranscript, bool detailed, int? offset, int? limit, CancellationToken cancellationToken)
 			{
 				var parameters = new Dictionary<string, object>
 				{
@@ -295,11 +294,11 @@ namespace System.Net.SlideShare
 					{ "page", offset }, { "items_per_page", limit ?? (offset.HasValue ? 10 : (int?)null) }
 				};
 				if (options != null) options.WriteTo(parameters);
-				var response = await client.GetAsync("search_slideshows", parameters, false, cancellationToken).ConfigureAwait(false);
-				return ToSlideshows(response, detailed);
-			}
+				return client.GetAsync("search_slideshows", parameters, false, cancellationToken)
+				    .ContinueWith(t => ToSlideshows(t.Result, detailed), TaskContinuationOptions.OnlyOnRanToCompletion);
+            }
 
-			public async Task<int> UploadAsync(string filepath, SlideshowDetailOptions options, CancellationToken cancellationToken)
+			public Task<int> UploadAsync(string filepath, SlideshowDetailOptions options, CancellationToken cancellationToken)
 			{
 				Uri uri;
 				if (!Uri.TryCreate(filepath, UriKind.Absolute, out uri))
@@ -311,7 +310,6 @@ namespace System.Net.SlideShare
 					throw new ArgumentException("filepath");
 #endif
 				}
-				XElement response;
 				var parameters = new Dictionary<string, object>();
 				options.WriteTo(parameters);
 
@@ -322,32 +320,31 @@ namespace System.Net.SlideShare
 #endif
 				{
 					parameters.Add("upload_url", uri.AbsolutePath);
-					response = await client.GetAsync("upload_slideshow", parameters, true, cancellationToken).ConfigureAwait(false);
+                    return client.GetAsync("upload_slideshow", parameters, true, cancellationToken)
+                        .ContinueWith(t => t.Result.AsInteger("SlideShowID"), TaskContinuationOptions.OnlyOnRanToCompletion);
 				}
-				else
-				{
-					var content = await client.BuildFileContent("slideshow_srcfile", uri.LocalPath, cancellationToken).ConfigureAwait(false);
-					parameters.Add(content.Headers.ContentDisposition.Name, content);
-					response = await client.PostAsync("upload_slideshow", parameters, cancellationToken).ConfigureAwait(false);
-				}
-				return response.AsInteger("SlideShowID");
+                return client.BuildFileContent("slideshow_srcfile", uri.LocalPath, cancellationToken)
+                    .ContinueWith(t =>
+                    {
+                        parameters.Add(t.Result.Headers.ContentDisposition.Name, t.Result);
+                        return client.PostAsync("upload_slideshow", parameters, cancellationToken)
+                            .ContinueWith(t2 => t2.Result.AsInteger("SlideShowID"), TaskContinuationOptions.OnlyOnRanToCompletion);
+                    }, TaskContinuationOptions.OnlyOnRanToCompletion)
+                    .Unwrap();
 			}
 
-			public async Task EditAsync(int slideshowId, SlideshowDetailOptions options, CancellationToken cancellationToken)
+			public Task EditAsync(int slideshowId, SlideshowDetailOptions options, CancellationToken cancellationToken)
 			{
 				var parameters = new Dictionary<string, object>();
-				client.IncludeCredentials(parameters);
-				options.WriteTo(parameters);
+                options.WriteTo(parameters);
 
-				await client.GetAsync("edit_slideshow", parameters, true, cancellationToken).ConfigureAwait(false);
+				return client.GetAsync("edit_slideshow", parameters, true, cancellationToken);
 			}
 			
-			public async Task DeleteAsync(int slideshowId, CancellationToken cancellationToken)
+			public Task DeleteAsync(int slideshowId, CancellationToken cancellationToken)
 			{
 				var parameters = new Dictionary<string, object> { { "slideshow_id", slideshowId } };
-				client.IncludeCredentials(parameters);
-
-				await client.GetAsync("delete_slideshow", parameters, true, cancellationToken).ConfigureAwait(false);
+                return client.GetAsync("delete_slideshow", parameters, true, cancellationToken);
 			}
 
 			private static Slideshow ToSlideshow(XElement root, bool expectDetails)
@@ -355,7 +352,7 @@ namespace System.Net.SlideShare
 				return expectDetails ? new SlideshowDetailed(root) : new Slideshow(root);
 			}
 
-			private static Slideshows ToSlideshows(XElement root, bool expectDetails)
+			private static IEnumerable<Slideshow> ToSlideshows(XElement root, bool expectDetails)
 			{
 				Func<XElement, Slideshow> selector = expectDetails ?
 					new Func<XElement, Slideshow>(s => new SlideshowDetailed(s)) :
@@ -378,28 +375,31 @@ namespace System.Net.SlideShare
 				this.client = client;
 			}
 
-			public async Task<IEnumerable<Group>> GetGroupsAsync(string username, CancellationToken cancellationToken)
+			public Task<IEnumerable<Group>> GetGroupsAsync(string username, CancellationToken cancellationToken)
 			{
 				var parameters = new Dictionary<string, object> { { "username_for", username } };
-				var response = await client.GetAsync("get_user_groups", parameters, false, cancellationToken).ConfigureAwait(false);
-				return response.Descendants("Group").Select(s => new Group(s)).ToList();
+				return client.GetAsync("get_user_groups", parameters, false, cancellationToken)
+                    .ContinueWith(t => SlideShare.Group.ToEntityList(t.Result), TaskContinuationOptions.OnlyOnRanToCompletion);
 			}
 
-			public async Task<IEnumerable<Contact>> GetContactsAsync(string username, CancellationToken cancellationToken)
+			public Task<IEnumerable<Contact>> GetContactsAsync(string username, CancellationToken cancellationToken)
 			{
 				var parameters = new Dictionary<string, object> { { "username_for", username } };
-				client.IncludeCredentials(parameters);
-
-				var response = await client.GetAsync("get_user_contacts", parameters, false, cancellationToken).ConfigureAwait(false);
-				return response.Descendants("Contact").Select(s => new Contact(s)).ToList();
+                return client.GetAsync("get_user_contacts", parameters, true, cancellationToken)
+                    .ContinueWith(t => SlideShare.Contact.ToEntityList(t.Result), TaskContinuationOptions.OnlyOnRanToCompletion);
 			}
 
-			public async Task<IEnumerable<string>> GetTagsAsync(CancellationToken cancellationToken)
+			public Task<IEnumerable<string>> GetTagsAsync(CancellationToken cancellationToken)
 			{
-				var response = await client.GetAsync("get_user_tags", null, true, cancellationToken).ConfigureAwait(false);
-				return response.Descendants("Tag").Select(s => s.ToString()).ToList();
-			}
-		}
+				return client.GetAsync("get_user_tags", null, true, cancellationToken)
+                    .ContinueWith(t => ToTags(t.Result), TaskContinuationOptions.OnlyOnRanToCompletion);
+            }
+
+            private static IEnumerable<string> ToTags(XElement root)
+            {
+                return root.Descendants("Tag").Select(s => s.ToString()).ToList();
+            }
+        }
 
 		private sealed class FavoriteContext : ISlideShareFavorite
 		{
@@ -410,31 +410,27 @@ namespace System.Net.SlideShare
 				this.client = client;
 			}
 
-			public async Task<IEnumerable<Favorite>> GetAsync(string username, CancellationToken cancellationToken)
+			public Task<IEnumerable<Favorite>> GetAsync(string username, CancellationToken cancellationToken)
 			{
 				var parameters = new Dictionary<string, object> { { "username_for", username } };
-				client.IncludeCredentials(parameters);
+				return client.GetAsync("get_user_favorites", parameters, true, cancellationToken)
+				    .ContinueWith(t => SlideShare.Favorite.ToEntityList(t.Result), TaskContinuationOptions.OnlyOnRanToCompletion);
+            }
 
-				var response = await client.GetAsync("get_user_favorites", parameters, false, cancellationToken).ConfigureAwait(false);
-				return response.Descendants("favorite").Select(s => new Favorite(s)).ToList();
-			}
-
-			public async Task<bool> AddAsync(int slideshowId, CancellationToken cancellationToken)
+			public Task<bool> AddAsync(int slideshowId, CancellationToken cancellationToken)
 			{
 				var parameters = new Dictionary<string, object> { { "slideshow_id", slideshowId } };
-				client.IncludeCredentials(parameters);
-
-				var response = await client.GetAsync("add_favorite", parameters, false, cancellationToken).ConfigureAwait(false);
-				return response.AsInteger("SlideShowID") == slideshowId;
+				return client.GetAsync("add_favorite", parameters, true, cancellationToken)
+                    .ContinueWith(t => t.Result.AsInteger("SlideShowID") == slideshowId, TaskContinuationOptions.OnlyOnRanToCompletion);
 			}
 
-			public async Task<bool> CheckAsync(int slideshowId, CancellationToken cancellationToken)
+			public Task<bool> CheckAsync(int slideshowId, CancellationToken cancellationToken)
 			{
 				var parameters = new Dictionary<string, object> { { "slideshow_id", slideshowId } };
-				var response = await client.GetAsync("check_favorite", parameters, false, cancellationToken).ConfigureAwait(false);
-				return response.AsBoolean("Favorited");
+				return client.GetAsync("check_favorite", parameters, false, cancellationToken)
+                    .ContinueWith(t => t.Result.AsBoolean("Favorited"), TaskContinuationOptions.OnlyOnRanToCompletion);
 			}
-		}
+        }
 
 		private sealed class MarketingContext : ISlideShareMarketing
 		{
@@ -445,33 +441,26 @@ namespace System.Net.SlideShare
 				this.client = client;
 			}
 
-			public async Task<IEnumerable<Campaign>> GetCampaignsAsync(CancellationToken cancellationToken)
+			public Task<IEnumerable<Campaign>> GetCampaignsAsync(CancellationToken cancellationToken)
 			{
 				var parameters = new Dictionary<string, object>();
-				client.IncludeCredentials(parameters);
-
-				var response = await client.GetAsync("get_user_campaigns", parameters, false, cancellationToken).ConfigureAwait(false);
-				return response.Descendants("LeadCampaign").Select(s => (Campaign)new LeadCampaign(s)).Union(
-					response.Descendants("PromotionCampaign").Select(s => new PromotionCampaign(s))).ToList();
+				return client.GetAsync("get_user_campaigns", parameters, true, cancellationToken)
+                    .ContinueWith(t => SlideShare.Campaign.ToEntityList(t.Result), TaskContinuationOptions.OnlyOnRanToCompletion);
 			}
 
-			public async Task<IEnumerable<Lead>> GetLeadsAsync(DateTime? begin, DateTime? end, CancellationToken cancellationToken)
+			public Task<IEnumerable<Lead>> GetLeadsAsync(DateTime? begin, DateTime? end, CancellationToken cancellationToken)
 			{
 				var parameters = new Dictionary<string, object> { { "begin", begin }, { "end", end } };
-				client.IncludeCredentials(parameters);
+				return client.GetAsync("get_user_leads", parameters, true, cancellationToken)
+                    .ContinueWith(t => SlideShare.Lead.ToEntityList(t.Result), TaskContinuationOptions.OnlyOnRanToCompletion);
+            }
 
-				var response = await client.GetAsync("get_user_leads", parameters, false, cancellationToken).ConfigureAwait(false);
-				return response.Descendants("Lead").Select(s => new Lead(s)).ToList();
-			}
-
-			public async Task<IEnumerable<Lead>> GetCampaignLeadsAsync(string campaignId, DateTime? begin, DateTime? end, CancellationToken cancellationToken)
+			public Task<IEnumerable<Lead>> GetCampaignLeadsAsync(string campaignId, DateTime? begin, DateTime? end, CancellationToken cancellationToken)
 			{
 				var parameters = new Dictionary<string, object> { { "campaign_id", campaignId }, { "begin", begin }, { "end", end } };
-				client.IncludeCredentials(parameters);
-
-				var response = await client.GetAsync("get_user_campaign_leads", parameters, false, cancellationToken).ConfigureAwait(false);
-				return response.Descendants("Lead").Select(s => new Lead(s)).ToList();
-			}
+				return client.GetAsync("get_user_campaign_leads", parameters, true, cancellationToken)
+                     .ContinueWith(t => SlideShare.Lead.ToEntityList(t.Result), TaskContinuationOptions.OnlyOnRanToCompletion);
+            }
 		}
 
 		private sealed class MetadataContext : ISlideShareMetadata
@@ -483,13 +472,16 @@ namespace System.Net.SlideShare
 				this.client = new HttpClient(new HttpClientHandler());
 			}
 
-			public async Task<SlideshowEmbed> GetAsync(string url, CancellationToken cancellationToken)
+			public Task<SlideshowEmbed> GetAsync(string url, CancellationToken cancellationToken)
 			{
 				var requestUrl = String.Format("http://www.slideshare.net/api/oembed/2?url={0}&format=xml", url);
-				var response = await this.client.GetAsync(requestUrl, CancellationToken.None).ConfigureAwait(false);
-				var content = response.EnsureSuccessStatusCode().Content;
-				var root = XElement.Load(await content.ReadAsStreamAsync());
-				return new SlideshowEmbed(root);
+                return this.client.GetAsync(requestUrl, cancellationToken)
+                    .ContinueWith(t =>
+                    {
+                        var content = t.Result.EnsureSuccessStatusCode().Content;
+                        return content.ReadAsStreamAsync().ContinueWith(t2 => new SlideshowEmbed(XElement.Load(t2.Result)));
+                    }, TaskContinuationOptions.OnlyOnRanToCompletion)
+                    .Unwrap();
 			}
 		}
 
@@ -502,22 +494,28 @@ namespace System.Net.SlideShare
 				this.client = new HttpClient(new HttpClientHandler());
 			}
 
-			public async Task<IEnumerable<FeedItem>> GetAsync(SlideShareFeed feed, CancellationToken cancellationToken)
+			public Task<IEnumerable<FeedItem>> GetAsync(SlideShareFeed feed, CancellationToken cancellationToken)
 			{
 				var requestUrl = CreateRequestUrl(feed, null);
-				var response = await this.client.GetAsync(requestUrl, CancellationToken.None).ConfigureAwait(false);
-				var content = response.EnsureSuccessStatusCode().Content;
-				var root = XElement.Load(await content.ReadAsStreamAsync());
-				return root.Descendants("item").Select(s => new FeedItem(s)).ToList();
+                return this.client.GetAsync(requestUrl, cancellationToken)
+                    .ContinueWith(t =>
+                    {
+                        var content = t.Result.EnsureSuccessStatusCode().Content;
+                        return content.ReadAsStreamAsync().ContinueWith(t2 => FeedItem.ToEntityList(XElement.Load(t2.Result)));
+                    }, TaskContinuationOptions.OnlyOnRanToCompletion)
+                    .Unwrap();
 			}
 
-			public async Task<IEnumerable<FeedItem>> GetFeaturedAsync(SlideShareCategory category, CancellationToken cancellationToken)
+			public Task<IEnumerable<FeedItem>> GetFeaturedAsync(SlideShareCategory category, CancellationToken cancellationToken)
 			{
 				var requestUrl = CreateRequestUrl(SlideShareFeed.Featured, category);
-				var response = await this.client.GetAsync(requestUrl, CancellationToken.None).ConfigureAwait(false);
-				var content = response.EnsureSuccessStatusCode().Content;
-				var root = XElement.Load(await content.ReadAsStreamAsync());
-				return root.Descendants("item").Select(s => new FeedItem(s)).ToList();
+				return this.client.GetAsync(requestUrl, cancellationToken)
+                    .ContinueWith(t =>
+                    {
+                        var content = t.Result.EnsureSuccessStatusCode().Content;
+                        return content.ReadAsStreamAsync().ContinueWith(t2 => FeedItem.ToEntityList(XElement.Load(t2.Result)));
+                    }, TaskContinuationOptions.OnlyOnRanToCompletion)
+                    .Unwrap();
 			}
 
 			private static string CreateRequestUrl(SlideShareFeed feed, SlideShareCategory? category)
